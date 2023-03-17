@@ -34,7 +34,7 @@ void Ticketing()
 	int choose = _getch();
 	switch (choose)
 	{
-	case 49:; break;
+	case 49:pview(); break;
 	case 50:; break;
 	case 51:PassengerLog();  break;
 	case 27:exit(0);
@@ -254,4 +254,61 @@ void plogin()//账户登录
 		}
 	}
 	Ticketing();
+}
+void pview()
+{
+	if ((fp6 = fopen("NumOfSite.txt", "r")) == NULL)
+	{
+		fp6 = fopen("NumOfSite.txt", "w");
+		fclose(fp6);
+	}
+	fp6 = fopen("NumOfSite.txt", "rb");
+	fseek(fp6, 0, SEEK_END);//将文件指针移到文件末尾
+	int len = ftell(fp6);//检查文件长度
+	fseek(fp6, 0, SEEK_SET);//将文件指针移到文件开头
+
+	if (len == 0)//未添加站点信息
+	{
+		system("cls");
+		printf("当前没有车次信息\n按任意键返回");
+		_getch();
+		Ticketing();
+	}
+
+	else//已添加站点信息
+	{
+		fp6 = fopen("NumOfSite.txt", "r");
+		fscanf(fp6, "%d", &NumOfSite);//从文件读取车票数
+		fclose(fp6);
+		if (NumOfSite == 0)//站点数为0
+		{
+			system("cls");
+			printf("当前没有车次信息\n按任意键返回");
+			_getch();
+			Ticketing();
+		}
+		else//站点数不为0
+		{
+			struct ticket* ticket = (struct ticket*)malloc(sizeof(struct ticket) * NumOfSite);
+			fp5 = fopen("Ticket.txt", "rb");
+			fread(ticket, sizeof(struct ticket), NumOfSite, fp5);//从文件中读取车票结构体
+			fclose(fp5);
+			system("cls");
+			for (int i = 0; i < NumOfSite; i++)
+			{
+				printf("NO.%d\n", ticket[i].no);
+				printf("起点站：%s\n", ticket[i].start);
+				printf("终点站：%s\n", ticket[i].destination);
+				printf("发车时间：%s\n", ticket[i].StartTime);
+				printf("预计到达时间：%s\n", ticket[i].ArriveTime);
+				printf("余票数：%d\n", ticket[i].RestOfTicket);
+				printf("                                                 \n");
+				printf("-------------------------------------------------\n");
+				printf("                                                 \n");
+			}
+			printf("按任意键返回");
+			_getch();
+			Ticketing();
+		}
+	}
 }
