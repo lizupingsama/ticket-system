@@ -271,6 +271,7 @@ void site()
 	{
 	case 49:view(); break;
 	case 50:AddSite(); break;
+	case 51:modify(); break;
 
 	}
 }
@@ -401,6 +402,82 @@ void view()
 			printf("按任意键返回");
 			_getch();
 			site();
+		}
+	}
+}
+void modify()
+{
+	if ((fp6 = fopen("NumOfSite.txt", "r")) == NULL)
+	{
+		fp6 = fopen("NumOfSite.txt", "w");
+		fclose(fp6);
+	}
+	fp6 = fopen("NumOfSite.txt", "rb");
+	fseek(fp6, 0, SEEK_END);//将文件指针移到文件末尾
+	int len = ftell(fp6);//检查文件长度
+	fseek(fp6, 0, SEEK_SET);//将文件指针移到文件开头
+
+	if (len == 0)//未添加站点信息
+	{
+		system("cls");
+		printf("当前没有车次信息\n按任意键返回");
+		_getch();
+		site();
+	}
+
+	else
+	{
+		fp6 = fopen("NumOfSite.txt", "r");
+		fscanf(fp6, "%d", &NumOfSite);//从文件读取车票数
+		fclose(fp6);
+
+		struct ticket* ticket = (struct ticket*)malloc(sizeof(struct ticket) * NumOfSite);
+		fp5 = fopen("Ticket.txt", "rb");
+		fread(ticket, sizeof(struct ticket), NumOfSite, fp5);//从文件中读取车票结构体
+		fclose(fp5);
+
+		system("cls");
+		printf("请选择要修改的车次编号");
+		int no;
+		scanf("%d", &no);
+		int flag = 1;
+
+		for (int i = 0; i < NumOfSite; i++)
+		{
+			if (no == ticket[i].no)
+			{
+				flag = 0;
+				break;
+			}
+		}
+		if (flag == 1)
+		{
+			printf("没有找到该车次信息\n");
+			printf("按任意键重新输入，按ESC返回");
+			int esc = _getch();
+			if (esc == 27)
+				site();
+			else
+				modify();
+		}
+		else
+		{
+			printf("NO.%d\n", ticket[no - 1].no);
+			printf("起点站：%s\n", ticket[no - 1].start);
+			printf("终点站：%s\n", ticket[no - 1].destination);
+			printf("发车时间：%s\n", ticket[no - 1].StartTime);
+			printf("预计到达时间：%s\n", ticket[no - 1].ArriveTime);
+			printf("余票数：%d\n", ticket[no - 1].RestOfTicket);
+			printf("\n");
+			printf("请选择要修改的内容\n");
+			printf("************************\n");
+			printf("***   1.起点站       ***\n");
+			printf("***   2.终点站       ***\n");
+			printf("***   3.发车时间     ***\n");
+			printf("***   4.预计到达时间 ***\n");
+			printf("***   5.余票数       ***\n");
+			printf("***   6.返回上一级   ***\n");
+			printf("************************\n");
 		}
 	}
 }

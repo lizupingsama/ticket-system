@@ -34,5 +34,7 @@ void plogon();
 void site();
 void AddSite();
 void view();
+void modify();
+
 void pview();
 
