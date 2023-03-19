@@ -52,13 +52,13 @@ void PassengerLog()
 	int choose = _getch();
 	switch (choose)
 	{
-	case 49:plogin(); break;
-	case 50:plogon(); break;
+	case 49:PassengerLogin(); break;
+	case 50:PassengerLogon(); break;
 	case 51:main();
 	}
 }
 
-void plogon()//首位乘客账户注册
+void PassengerLogon()
 {
 	if ((fp4 = fopen("NumOfPassenger.txt", "r")) == NULL)
 	{
@@ -178,7 +178,7 @@ void plogon()//首位乘客账户注册
 		PassengerLog();
 	}
 }
-void plogin()//账户登录
+void PassengerLogin()//账户登录
 {
 	char id[20];
 	char password[20];
@@ -208,7 +208,7 @@ void plogin()//账户登录
 		}
 		else
 		{
-			plogin();
+			PassengerLogin();
 		}
 	}
 

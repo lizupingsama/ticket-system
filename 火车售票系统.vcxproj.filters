@@ -24,9 +24,6 @@
     <ClCompile Include="后台管理.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="文件读入输出函数.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="标头.h">

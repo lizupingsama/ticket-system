@@ -132,7 +132,6 @@
     <ClCompile Include="主菜单.cpp" />
     <ClCompile Include="后台管理.cpp" />
     <ClCompile Include="售票服务.cpp" />
-    <ClCompile Include="文件读入输出函数.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="标头.h" />

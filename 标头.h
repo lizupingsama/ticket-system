@@ -28,13 +28,14 @@ void logon();
 void login();
 
 void PassengerLog();
-void plogin();
-void plogon();
+void PassengerLogin();
+void PassengerLogon();
 
 void site();
 void AddSite();
 void view();
 void modify();
+void delet();
 
 void pview();
 
