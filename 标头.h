@@ -30,12 +30,16 @@ void login();
 void PassengerLog();
 void PassengerLogin();
 void PassengerLogon();
+void ViewMine();
+void subscribe();
+void cancel();
 
 void site();
 void AddSite();
 void view();
 void modify();
 void delet();
+void ModifyNum();
 
 void pview();
 
