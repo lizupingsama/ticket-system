@@ -400,7 +400,7 @@ void subscribe()
 		else
 		{
 			system("cls");
-			printf("您确定要添加改车次车票吗？\n");
+			printf("您确定要预定该车次车票吗？\n");
 			printf("NO.%d\n", ticket[no - 1].no);
 			printf("起点站：%s\n", ticket[no - 1].start);
 			printf("终点站：%s\n", ticket[no - 1].destination);
